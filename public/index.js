@@ -1,18 +1,36 @@
+let beers = [];
+
 const app = function () {
 
   const url = 'https://api.punkapi.com/v2/beers';
-  const onButtonClick = document.querySelector('#button');
   const onSelect = document.querySelector('#select');
-  onSelect.addEventListener('change', fillData(url));
-
-  // makeRequest(url, requestComplete);
-
-}
-
-const fillData = function(url) {
-
   makeRequest(url, requestCompleteDropdown)
+  onSelect.addEventListener('change', function(){
+    // fillData(url)
+    console.log(this.value);
+    console.log(beers[this.value].name);
+    const ul = document.querySelector("#beer-list");
+    ul.innerHTML = "";
+    const li = document.createElement("li");
+    const img = document.createElement("img");
+    li.innerText = beers[this.value].name
+    img.src = beers[this.value].image_url;
+    ul.appendChild(li);
+    ul.appendChild(img);
+
+  });
+
 }
+
+// const showBeer = function(id) {
+//   const ul = document.querySelector("#beer-list");
+//   const li = document.createElement("li");
+//   const img = document.createElement("img");
+//   li.innerText = beers[this.value].name
+//   img.src = beers[this.value].image_url;
+//   ul.appendChild(li);
+//   ul.appendChild(img);
+// }
 
 const makeRequest = function(url, callback) {
   const request = new XMLHttpRequest();
@@ -26,7 +44,7 @@ const makeRequest = function(url, callback) {
 const requestComplete = function() {
   if(this.status !== 200) return;
   const jsonString = this.responseText;
-  const beers = JSON.parse(jsonString);
+  beers = JSON.parse(jsonString);
   populateList(beers);
 }
 
@@ -35,16 +53,15 @@ const requestCompleteDropdown = function() {
   const jsonString = this.responseText;
   beers = JSON.parse(jsonString);
   handlSelectChange(beers);
+
+
 }
 
 const populateList = function(beers) {
   const ul = document.querySelector('#beer-list');
-
-  beers.forEach(function(beer) {
-    const li = document.createElement('li');
+  const li = document.createElement('li');
     li.innerText = beer.name;
     ul.appendChild(li);
-  });
 }
 
 const handlSelectChange = function(beers) {
@@ -54,7 +71,9 @@ const handlSelectChange = function(beers) {
     option.innerText = beer.name;
     option.value = index;
     select.appendChild(option);
-  });
+
+  }.bind(this));
+
 }
 
 
