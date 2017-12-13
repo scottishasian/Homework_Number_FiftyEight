@@ -10,13 +10,22 @@ const app = function () {
     console.log(this.value);
     console.log(beers[this.value].name);
     const ul = document.querySelector("#beer-list");
+    const p = document.querySelector("#beer-info");
     ul.innerHTML = "";
+    p.innerHTML = "";
     const li = document.createElement("li");
     const img = document.createElement("img");
-    li.innerText = beers[this.value].name
+    const para = document.createElement("p");
+    const para2 = document.createElement("p");
+    li.innerText = "Name:" + beers[this.value].name
+    para.innerText = "ABV: " + beers[this.value].abv
+    para2.innerText = "Ingredients: " + beers[this.value].description
     img.src = beers[this.value].image_url;
     ul.appendChild(li);
     ul.appendChild(img);
+    p.appendChild(para);
+    p.appendChild(para2);
+
 
   });
 
