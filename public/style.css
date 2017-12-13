@@ -1,0 +1,29 @@
+h1 {
+  font-style: italic;
+  padding: 10px;
+  margin: auto;
+  margin-bottom: 20px;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+select {
+  margin: 0 auto;
+  display: block;
+
+}
+
+ul {
+  position: inherit;
+  display: inline;
+}
+
+li {
+  padding: 10px;
+  border-style: solid black;
+}
+
+img {
+  width: 500px;
+}
